@@ -1,0 +1,4 @@
+# Project exclude paths
+/target/DeathDropPercent-1.0.jar
+/target/DeathDropPercent-1.0-shaded.jar
+/target/original-DeathDropPercent-1.0.jar
