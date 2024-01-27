@@ -1,0 +1,10 @@
+name: DeathDropPercent
+author: MrQuackDuck
+version: '${project.version}'
+main: net.justempire.deathdroppercent.DeathDropPercent
+api-version: '1.20'
+commands:
+  deathdroppercent:
+    permission: deathdroppercent.admin
+    aliases:
+      - ddc
