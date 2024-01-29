@@ -1,2 +1,5 @@
+# When set to false, server will have default death behaviour
 isEnabled: true
+# Percentage of inventory to drop on death (from 0.0 to 1.0)
+# Inventory has 41 slots in total, including armor and second hand
 percentToDrop: 0.5

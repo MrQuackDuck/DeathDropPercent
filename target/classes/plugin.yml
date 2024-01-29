@@ -1,8 +1,8 @@
 name: DeathDropPercent
 author: MrQuackDuck
-version: '1.0'
+version: '1.1'
 main: net.justempire.deathdroppercent.DeathDropPercent
-api-version: '1.20'
+api-version: '1.16'
 commands:
   deathdroppercent:
     permission: deathdroppercent.admin
