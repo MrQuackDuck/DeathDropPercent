@@ -3,6 +3,7 @@ package net.justempire.deathdroppercent;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -36,7 +37,7 @@ public class DeathListener implements Listener {
         if (keepInventoryEnabled) return;
 
         // Getting inventory items that are not air
-        List<ItemSlot> nonEmptyItems = new ArrayList<ItemSlot>();
+        List<ItemSlot> nonEmptyItems = new ArrayList<>();
         for (int slotIndex = 0; slotIndex < 40; slotIndex++) {
             ItemStack item = items[slotIndex];
             if (item == null) continue;
@@ -52,7 +53,13 @@ public class DeathListener implements Listener {
             Random r = new Random();
             ItemSlot itemToRemove = nonEmptyItems.get(r.nextInt(nonEmptyItems.size()));
             int itemToRemoveIndex = itemToRemove.slotIndex;
-            world.dropItem(location, itemToRemove.slotContent);
+
+            // Drop the item if it doesn't have vanishing curse on it AND the player has a permission to drop
+            if (!itemToRemove.slotContent.containsEnchantment(Enchantment.VANISHING_CURSE)
+                && player.hasPermission("deathdroppercent.drop")) {
+                world.dropItem(location, itemToRemove.slotContent);
+            }
+
             inventory.setItem(itemToRemoveIndex, new ItemStack(Material.AIR));
             nonEmptyItems.remove(itemToRemove);
         }

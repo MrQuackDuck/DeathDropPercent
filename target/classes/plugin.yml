@@ -1,6 +1,6 @@
 name: DeathDropPercent
 author: MrQuackDuck
-version: '1.1'
+version: '1.2'
 main: net.justempire.deathdroppercent.DeathDropPercent
 api-version: '1.16'
 commands:
@@ -8,3 +8,11 @@ commands:
     permission: deathdroppercent.admin
     aliases:
       - ddc
+
+permissions:
+  deathdroppercent.admin:
+    description: Allows to use /ddc command
+    default: op
+  deathdroppercent.drop:
+    description: Is player permitted to drop items on death?
+    default: true
