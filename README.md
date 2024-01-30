@@ -21,6 +21,11 @@ Example: if `percentToDrop` is set to 0.5 (which means 50%), the player will los
 - `/ddc disable` — disables the plugin.
 - `/ddc reload` — reloads the config.
 
+## Permissions
+
+- `deathdroppercent.admin` - Allows to use `/ddc` command
+- `deathdroppercent.drop` - Is the player **supposted** to drop items on death? (**true** by default)
+
 ## Default config
 
 ```yml
