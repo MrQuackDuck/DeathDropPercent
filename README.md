@@ -29,11 +29,19 @@ Example: if `percentToDrop` is set to 0.5 (which means 50%), the player will los
 ## Default config
 
 ```yml
-# When set to false, the server will have default death behavior
+# When set to false, server will have default death behaviour
 isEnabled: true
-# Percentage of inventory to drop on death (from 0.0 to 1.0)
+# Default percentage of inventory to drop on death (from 0.0 to 1.0)
 # Inventory has 41 slots in total, including armor and second hand
 percentToDrop: 0.5
+
+# Overridden percentages for certain permissions
+# IMPORTANT: If you want to enable custom percents for certain permissions,
+# don't also forget to add these permissions to groups/players
+# like that: deathdroppercent.custom.vip (and don't forget to uncomment the code below)
+customPercents:
+#  'vip': 0.4
+#  'mvp': 0.2
 ```
 
 ## Getting started
