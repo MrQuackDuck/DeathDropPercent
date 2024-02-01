@@ -15,6 +15,10 @@ Example: if `percentToDrop` is set to 0.5 (which means 50%), the player will los
 > The `percentToDrop` can be edited in the `config.yml` file.
 </p>
 
+> [!CAUTION]
+> If the `keepInventory` rule in the world is set to `true`, the plugin **won't affect** the player's inventory behavior after death. 
+</p>
+
 ## Commands
 - `/ddc info` — shows the current state of the plugin and the current percentage of items to drop after death.
 - `/ddc enable` — enables the plugin.
