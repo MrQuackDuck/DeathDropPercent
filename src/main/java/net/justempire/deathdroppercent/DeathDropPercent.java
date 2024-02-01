@@ -1,6 +1,11 @@
 package net.justempire.deathdroppercent;
 
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Map;
 
 public final class DeathDropPercent extends JavaPlugin {
     public static boolean isEnabled;
@@ -13,25 +18,11 @@ public final class DeathDropPercent extends JavaPlugin {
         // Creating config if it doesn't exist
         saveDefaultConfig();
 
-        if (!getConfig().contains("isEnabled")) {
-            getConfig().set("isEnabled", true);
-            isEnabled = true;
-        }
-        else isEnabled = (boolean)getConfig().get("isEnabled");
-
-
-        if (!getConfig().contains("percentToDrop")) {
-            getConfig().set("percentToDrop", 0.5);
-            percentToDrop = 0.5;
-        }
-        else percentToDrop = (double)getConfig().get("percentToDrop");
-
-        getConfig().set("isEnabled", isEnabled);
-        getConfig().set("percentToDrop", percentToDrop);
-        saveConfig();
+        // Setting up config and some permissions
+        configure();
 
         // Setting up death listener
-        DeathListener deathListener = new DeathListener();
+        DeathListener deathListener = new DeathListener(this);
         getServer().getPluginManager().registerEvents(deathListener, this);
 
         // Setting up the executor for /ddc
@@ -39,6 +30,29 @@ public final class DeathDropPercent extends JavaPlugin {
         this.getCommand("deathdroppercent").setExecutor(ddcCommand);
 
         System.out.println("[DeathDropPercent] Enabled successfully!");
+    }
+
+    private void configure() {
+        // Adding overridden permissions from config
+        ConfigurationSection configSection = getConfig().getConfigurationSection("customPercents");
+        if (configSection != null) {
+            Map<String, Object> groupsAndPercents = configSection.getValues(true);
+            for (Map.Entry<String, Object> pair : groupsAndPercents.entrySet()) {
+                String permissionToAdd = "deathdroppercent.custom." + pair.getKey();
+                // Skip iteration if permission was already added
+                if (getServer().getPluginManager().getPermission(permissionToAdd) != null) continue;
+                getServer().getPluginManager().addPermission(new Permission(permissionToAdd, PermissionDefault.FALSE));
+            }
+        }
+
+        isEnabled = (boolean)getConfig().get("isEnabled");
+        percentToDrop = (double)getConfig().get("percentToDrop");
+        saveDefaultConfig();
+    }
+
+    public void reload() {
+        reloadConfig();
+        configure();
     }
 
     @Override

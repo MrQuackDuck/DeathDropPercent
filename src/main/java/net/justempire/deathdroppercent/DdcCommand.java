@@ -4,10 +4,13 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.util.StringUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DdcCommand implements CommandExecutor, TabCompleter {
     private final DeathDropPercent plugin;
@@ -30,12 +33,19 @@ public class DdcCommand implements CommandExecutor, TabCompleter {
             return true;
         }
         else if (strings[0].equalsIgnoreCase("info")) {
-            messageToSend = GREEN + "[DDC] info:\n| Plugin is ";
+            messageToSend = GREEN + "\n[DDC] info:\n| Plugin is ";
             if (DeathDropPercent.isEnabled) messageToSend += YELLOW + "enabled";
             else messageToSend += RED + "disabled";
 
             messageToSend += GREEN + " right now.";
             messageToSend += "\n| Current percentage is " + YELLOW + DeathDropPercent.percentToDrop;
+
+            ConfigurationSection configSection = plugin.getConfig().getConfigurationSection("customPercents");
+            Map<String, Object> customPercents = new HashMap<>();
+            if (configSection != null) customPercents = configSection.getValues(true);
+            for (Map.Entry<String, Object> pair : customPercents.entrySet()) {
+                messageToSend += GREEN + "\n| Percentage for " + YELLOW + pair.getKey() + GREEN + " is " + YELLOW + pair.getValue();
+            }
         }
         else if (strings[0].equalsIgnoreCase("enable")) {
             messageToSend = GREEN + "[DDC] Plugin " + YELLOW + "enabled" + GREEN + " successfully!";
@@ -50,10 +60,15 @@ public class DdcCommand implements CommandExecutor, TabCompleter {
             plugin.saveConfig();
         }
         else if (strings[0].equalsIgnoreCase("reload")) {
-            plugin.reloadConfig();
-            DeathDropPercent.isEnabled = (boolean)plugin.getConfig().get("isEnabled");
-            DeathDropPercent.percentToDrop = (double)plugin.getConfig().get("percentToDrop");
-            messageToSend = GREEN + "[DDC] Plugin reloaded!\nCurrent percentage is " + YELLOW + DeathDropPercent.percentToDrop;
+            plugin.reload();
+            messageToSend = GREEN + "\n[DDC] Plugin reloaded!\nCurrent default percentage is " + YELLOW + DeathDropPercent.percentToDrop;
+
+            ConfigurationSection configSection = plugin.getConfig().getConfigurationSection("customPercents");
+            Map<String, Object> customPercents = new HashMap<>();
+            if (configSection != null) customPercents = configSection.getValues(true);
+            for (Map.Entry<String, Object> pair : customPercents.entrySet()) {
+                messageToSend += GREEN + "\n- Percentage for " + YELLOW + pair.getKey() + GREEN + " is " + YELLOW + pair.getValue();
+            }
         }
         else {
             messageToSend = RED + "[DDC] That command doesn't exist!";
