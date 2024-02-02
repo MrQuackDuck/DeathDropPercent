@@ -1,4 +1,4 @@
-package net.justempire.deathdroppercent;
+package net.justempire.deathdroppercent.utils;
 
 import net.md_5.bungee.api.ChatColor;
 
@@ -9,7 +9,7 @@ public class MessageColorizer {
     private static final Pattern HEX_PATTERN = Pattern.compile("&(#\\w{6})");
 
     // Colorize raw message
-    public static String colorize(String str)
+    public static String colorize(Object sender, String str)
     {
         Matcher matcher = HEX_PATTERN.matcher(ChatColor.translateAlternateColorCodes('&', str));
         StringBuffer buffer = new StringBuffer();

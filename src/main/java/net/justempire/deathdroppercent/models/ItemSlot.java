@@ -1,4 +1,4 @@
-package net.justempire.deathdroppercent;
+package net.justempire.deathdroppercent.models;
 
 import org.bukkit.inventory.ItemStack;
 

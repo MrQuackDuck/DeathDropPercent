@@ -1,6 +1,10 @@
 package net.justempire.deathdroppercent;
 
+import net.justempire.deathdroppercent.commands.DdcCommand;
+import net.justempire.deathdroppercent.listeners.DeathListener;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.java.JavaPlugin;

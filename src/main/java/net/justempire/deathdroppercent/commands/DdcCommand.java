@@ -1,5 +1,7 @@
-package net.justempire.deathdroppercent;
+package net.justempire.deathdroppercent.commands;
 
+import net.justempire.deathdroppercent.DeathDropPercent;
+import net.justempire.deathdroppercent.utils.MessageColorizer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -29,7 +31,7 @@ public class DdcCommand implements CommandExecutor, TabCompleter {
 
         if (strings.length == 0) {
             messageToSend = GREEN + "[DDC] Provide more arguments, please.";
-            sender.sendMessage(MessageColorizer.colorize(messageToSend));
+            sender.sendMessage(MessageColorizer.colorize(this, messageToSend));
             return true;
         }
         else if (strings[0].equalsIgnoreCase("info")) {
@@ -43,9 +45,8 @@ public class DdcCommand implements CommandExecutor, TabCompleter {
             ConfigurationSection configSection = plugin.getConfig().getConfigurationSection("customPercents");
             Map<String, Object> customPercents = new HashMap<>();
             if (configSection != null) customPercents = configSection.getValues(true);
-            for (Map.Entry<String, Object> pair : customPercents.entrySet()) {
+            for (Map.Entry<String, Object> pair : customPercents.entrySet())
                 messageToSend += GREEN + "\n| Percentage for " + YELLOW + pair.getKey() + GREEN + " is " + YELLOW + pair.getValue();
-            }
         }
         else if (strings[0].equalsIgnoreCase("enable")) {
             messageToSend = GREEN + "[DDC] Plugin " + YELLOW + "enabled" + GREEN + " successfully!";
@@ -66,15 +67,14 @@ public class DdcCommand implements CommandExecutor, TabCompleter {
             ConfigurationSection configSection = plugin.getConfig().getConfigurationSection("customPercents");
             Map<String, Object> customPercents = new HashMap<>();
             if (configSection != null) customPercents = configSection.getValues(true);
-            for (Map.Entry<String, Object> pair : customPercents.entrySet()) {
+            for (Map.Entry<String, Object> pair : customPercents.entrySet())
                 messageToSend += GREEN + "\n- Percentage for " + YELLOW + pair.getKey() + GREEN + " is " + YELLOW + pair.getValue();
-            }
         }
         else {
             messageToSend = RED + "[DDC] That command doesn't exist!";
         }
 
-        sender.sendMessage(MessageColorizer.colorize(messageToSend));
+        sender.sendMessage(MessageColorizer.colorize(this, messageToSend));
 
         return true;
     }

@@ -1,5 +1,5 @@
-net\justempire\deathdroppercent\MessageColorizer.class
-net\justempire\deathdroppercent\ItemSlot.class
+net\justempire\deathdroppercent\models\ItemSlot.class
+net\justempire\deathdroppercent\listeners\DeathListener.class
 net\justempire\deathdroppercent\DeathDropPercent.class
-net\justempire\deathdroppercent\DeathListener.class
-net\justempire\deathdroppercent\DdcCommand.class
+net\justempire\deathdroppercent\commands\DdcCommand.class
+net\justempire\deathdroppercent\utils\MessageColorizer.class
