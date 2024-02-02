@@ -15,6 +15,10 @@ Example: if `percentToDrop` is set to 0.5 (which means 50%), the player will los
 > The `percentToDrop` can be edited in the `config.yml` file.
 </p>
 
+> [!CAUTION]
+> If the `keepInventory` rule in the world is set to `true`, the plugin **won't affect** the player's inventory behavior after death. 
+</p>
+
 ## Commands
 - `/ddc info` — shows the current state of the plugin and the current percentage of items to drop after death.
 - `/ddc enable` — enables the plugin.
@@ -29,11 +33,19 @@ Example: if `percentToDrop` is set to 0.5 (which means 50%), the player will los
 ## Default config
 
 ```yml
-# When set to false, the server will have default death behavior
+# When set to false, server will have default death behaviour
 isEnabled: true
-# Percentage of inventory to drop on death (from 0.0 to 1.0)
+# Default percentage of inventory to drop on death (from 0.0 to 1.0)
 # Inventory has 41 slots in total, including armor and second hand
 percentToDrop: 0.5
+
+# Overridden percentages for certain permissions
+# IMPORTANT: If you want to enable custom percents for certain permissions,
+# don't also forget to add these permissions to groups/players
+# like that: deathdroppercent.custom.vip (and don't forget to uncomment the code below)
+customPercents:
+#  'vip': 0.4
+#  'mvp': 0.2
 ```
 
 ## Getting started
