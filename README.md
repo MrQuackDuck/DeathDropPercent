@@ -5,11 +5,10 @@
   <a href="https://github.com/vshymanskyy/StandWithUkraine"><img src="https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg"></a>
 </p>
   
- **DeathDropPercent** is a **Spigot** plugin that changes the behavior of a player's death.
+<p><b>DeathDropPercent</b> is a <b>Spigot</b> plugin that changes the behavior of a player's death. <br>
+After death, a player drops only a certain <b>percentage</b> of his inventory slots. Slots are chosen <b>randomly</b>.</p>
 
-<p>After death, a player drops only a certain <b>percentage</b> of his inventory slots. Slots are chosen <b>randomly</b>.</p>
-
-Example: if `percentToDrop` is set to 0.5 (which means 50%), the player will lose half of his inventory slots.
+<b>Example</b>: if <code>percentToDrop</code> is set to 0.5 (which means 50%), the player will lose half of his inventory slots. <br>
 
 > [!NOTE]
 > The `percentToDrop` can be edited in the `config.yml` file.
@@ -19,18 +18,18 @@ Example: if `percentToDrop` is set to 0.5 (which means 50%), the player will los
 > If the `keepInventory` rule in the world is set to `true`, the plugin **won't affect** the player's inventory behavior after death. 
 </p>
 
-## Commands
+## 💻 Commands
 - `/ddc info` — shows the current state of the plugin and the current percentage of items to drop after death.
 - `/ddc enable` — enables the plugin.
 - `/ddc disable` — disables the plugin.
 - `/ddc reload` — reloads the config.
 
-## Permissions
+## ❗ Permissions
 
 - `deathdroppercent.admin` - Allows to use `/ddc` command
 - `deathdroppercent.drop` - Is the player **supposted** to drop items on death? (**true** by default)
 
-## Default config
+## 📄 Default config
 
 ```yml
 # When set to false, server will have default death behaviour
@@ -48,7 +47,7 @@ customPercents:
 #  'mvp': 0.2
 ```
 
-## Getting started
+## ☂ Getting started
 
 > [!IMPORTANT]
 > Before getting started, make sure that the plugin's version is **compatible** with your server version.
